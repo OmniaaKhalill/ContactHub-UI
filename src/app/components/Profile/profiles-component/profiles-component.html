@@ -1,1 +1,37 @@
-<p>profiles-component works!</p>
+<div class="container mt-4">
+  <table class="table table-hover shadow-sm align-middle">
+    <thead class="table-light">
+      <tr>
+        <th>Full Name</th>
+        <th>Email</th>
+        <th>User Name</th>
+        <th>Phone Number</th>
+        <th>Address</th>
+        <th>Roles</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (profile of entities; track profile.id) {
+        <tr>
+          <td>{{ profile.fullName }}</td>
+          <td>{{ profile.email }}</td>
+          <td>{{ profile.userName }}</td>
+          <td>{{ profile.phoneNumber || '-' }}</td>
+          <td>{{ profile.address || '-' }}</td>
+          <td>
+            @for (role of profile.roles; track role; let i = $index) {
+              {{ role }}
+              @if (i < profile.roles.length - 1) { , }
+            }
+          </td>
+          <td class="text-center">
+            <button class="btn btn-sm btn-primary me-2" (click)="onDetails(profile)">Details</button>
+            <button class="btn btn-sm btn-warning me-2" (click)="onUpdate(profile)">Update</button>
+            <button class="btn btn-sm btn-danger" (click)="onDelete(profile)">Delete</button>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+</div>
