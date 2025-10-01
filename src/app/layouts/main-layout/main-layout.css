@@ -1,0 +1,15 @@
+.layout-frame{
+    width: calc(100vw - 17.65vw);
+    height: 100vh;
+    display: flex;
+    justify-content:flex-start;
+    align-items: center; 
+    background-color:var(--background-color); 
+
+    flex-direction: column;
+    flex-shrink: 2;
+    overflow-x: scroll;
+    scrollbar-width: none; /* Firefox */
+    -ms-overflow-style: none;
+
+}

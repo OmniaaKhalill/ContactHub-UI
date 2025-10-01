@@ -1,0 +1,276 @@
+.side-nav-frame {
+  background-color: var(--light-color);
+  width: 17.6vw;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  padding: 0px;
+  border-radius: 20px 0px 20px 20px;
+  position: relative;
+}
+.nav-header {
+  width: 100%;
+  height: 15%;
+  border-bottom: 1px solid transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-image: linear-gradient(
+      to bottom,
+      rgb(255, 255, 255),
+      rgb(191.25, 191.25, 191.25)
+    )
+    1;
+    font-size: large;
+    color: var( --primary-color);
+    font-weight: bold;
+}
+
+.logo {
+  width: 55%;
+  height: 60%;
+
+  background-size: 100% 100%;
+}
+
+.tabs {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+
+
+  width: 100%;
+  margin-top: 1em;
+}
+.nav-footer-text {
+  color: var(--grey-color);
+
+  display: flex;
+  justify-content: center;
+}
+.nav-footer {
+  position: absolute;
+  bottom: 3rem;
+  left: 2rem;
+  gap: 0.5rem;
+
+  display: flex;
+}
+
+.logout-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+a {
+  text-decoration: none;
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.tab {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  padding: 5px 5px 5px 20px;
+  width: 100%;
+  font-size: 1rem;
+  flex: 1 1 auto !important;
+}
+
+.tab-active {
+  font-size: 1.2em !important;
+  color: var(--light-primary-color) !important;
+
+  width: 85%;
+}
+
+.tab-txt {
+  font-size: 1.2em;
+  color: var(--grey-color);
+  position: relative;
+  width: fit-content;
+  font-weight: 400;
+  font-family: "Cairo", sans-serif;
+  letter-spacing: 0;
+  line-height: normal;
+  white-space: nowrap;
+  width: 75%;
+}
+
+.tab-icon {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  margin-right: 1em;
+}
+
+.noti-order {
+  display: none;
+}
+
+a.tab-active ~ .noti-order {
+  width: 35px;
+  height: 35px;
+  background-color: var(--red-color);
+  color: var(--light-color);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-seen {
+  display: none;
+}
+
+a.nsv-link ~ .not-seen {
+  width: 30px;
+  height: 30px;
+  background-color: rgb(239, 7, 7);
+  color: #ffffff;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tab-order {
+  width: 30%;
+}
+
+@media (min-width: 900px) and (max-width: 1119px) {
+  a.tab-active ~ .noti-order {
+    width: 25px;
+    height: 25px;
+  }
+
+  .tab-icon{
+
+    width: 15px;
+    height: 15px;
+    margin-right: 0.5em;
+  }
+
+  .tab {
+    margin-top: 0.5rem;
+
+    padding: 3px 3px 3px 12px;
+    width: 100%;
+    font-size: 0.65rem;
+  }
+
+
+  .nav-footer{
+
+    bottom: 1.5rem;
+    left: 1rem;
+    gap: 0.25rem;
+font-size: 0.65rem;
+  
+  }
+
+ 
+}
+
+
+@media (min-width: 1400px) and (max-width: 1600px) 
+{
+
+    .tab {
+        margin-top: 0.8rem;
+
+        padding: 3px 3px 3px 12px;
+        width: 100%;
+        font-size: 0.9rem;
+
+      }
+
+     
+}
+
+
+@media (min-width: 900px) and (max-width: 1400px)
+{
+
+    .tab {
+        margin-top: 0.3rem;
+        padding: 3px 3px 3px 12px;
+        width: 100%;
+        font-size: 0.75rem;
+      }
+
+      
+     
+}
+
+
+
+
+/* Medium screens: tablets/laptops */
+@media (max-width: 1119px) {
+  .side-nav-frame {
+    width: 12vw;
+    min-width: 150px;
+  }
+
+  .tab-txt {
+    font-size: 0.9rem;
+  }
+
+  .tab-icon {
+    width: 15px;
+    height: 15px;
+    margin-right: 0.5em;
+  }
+}
+
+/* Small screens: mobile */
+@media (max-width: 768px) {
+  .side-nav-frame {
+    width: 60px; /* collapse nav to icons only */
+    border-radius: 0;
+  }
+
+  .tab-txt {
+    display: none; /* hide text to save space */
+  }
+
+  .nav-header {
+    font-size: 0; /* hide text */
+  }
+
+  .tab-icon {
+    margin-right: 0;
+    width: 25px;
+    height: 25px;
+  }
+
+  .nav-footer {
+    flex-direction: column;
+    bottom: 1rem;
+    left: 0.5rem;
+  }
+}
+
+.side-nav-frame {
+  width: 18vw; /* for large screens */
+  min-width: 200px;
+  max-width: 250px;
+  transition: width 0.3s ease;
+}
+.side-nav-frame.collapsed {
+  width: 60px;
+}
+
+.tab {
+  padding: 0.5rem 0.5rem 0.5rem 1rem;
+}
+
+.side-nav-frame {
+  transition: width 0.3s ease, font-size 0.3s ease;
+}
