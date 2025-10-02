@@ -1,13 +1,22 @@
-<div class="container mt-4">
+
+
+
+<div class="container   mt-4">
+<div class=" d-flex flex-row justify-content-between my-5">
+   <h5 >All Profiles</h5>
+  <button type="button" class="btn  btn-success"> Add </button>
+
+</div>
+ 
+
   <table class="table table-hover shadow-sm align-middle">
-    <thead class="table-light">
+    <thead class="table-light "  >
       <tr>
-        <th>Full Name</th>
+        <th> Name</th>
         <th>Email</th>
-        <th>User Name</th>
-        <th>Phone Number</th>
+        <th>Phone </th>
         <th>Address</th>
-        <th>Roles</th>
+        <th>Role</th>
         <th class="text-center">Actions</th>
       </tr>
     </thead>
@@ -16,7 +25,6 @@
         <tr>
           <td>{{ profile.fullName }}</td>
           <td>{{ profile.email }}</td>
-          <td>{{ profile.userName }}</td>
           <td>{{ profile.phoneNumber || '-' }}</td>
           <td>{{ profile.address || '-' }}</td>
           <td>
@@ -26,8 +34,7 @@
             }
           </td>
           <td class="text-center">
-            <button class="btn btn-sm btn-primary me-2" (click)="onDetails(profile)">Details</button>
-            <button class="btn btn-sm btn-warning me-2" (click)="onUpdate(profile)">Update</button>
+            <button class="btn btn-sm btn-primary me-2" (click)="onUpdate(profile)">Update</button>
             <button class="btn btn-sm btn-danger" (click)="onDelete(profile)">Delete</button>
           </td>
         </tr>
@@ -35,3 +42,4 @@
     </tbody>
   </table>
 </div>
+ 

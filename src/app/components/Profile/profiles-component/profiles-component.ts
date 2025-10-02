@@ -19,19 +19,23 @@ export class ProfilesComponent {
 
   ngOnInit(): void {
     
+    
     this.profileService.GetAll().subscribe(
-data=>{
-
-    console.log(data)
-    this.entities=data
- 
-    },
-    error => {
-   
-     console.error('Error: ', error)
-    })
+data=>{this.loadProfiles()},
+    error => { console.error('Error: ', error)})
   }
 
+
+   loadProfiles(): void {
+    this.profileService.GetAll().subscribe({
+      next: (data) => {
+        this.entities = data;
+        console.log('Profiles:', this.entities);
+      },
+      error: (err) => {
+        console.error('Error loading profiles:', err);
+      }
+    });}
   onDetails(profile: Profile): void {
   console.log("Details clicked:", profile);
   // Navigate to details page or open modal
