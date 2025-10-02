@@ -24,11 +24,10 @@ export class ProfileModalComponent {
   ngOnChanges() {
     if (this.mode === 'update' && this.profile) {
       this.form = { ...this.profile };
-this.photoPreview = this.profile.photo ? URL.createObjectURL(this.profile.photo) : null;
     } else {
       this.form = new ProfileForCreate(
-        '', '', null, null, '', '', [], '',0,
-        new Date(), 
+        '', '', null, null, '', '', "",0,''
+        
               
       );
       this.photoPreview = null;
@@ -38,15 +37,14 @@ this.photoPreview = this.profile.photo ? URL.createObjectURL(this.profile.photo)
   open(profile?: ProfileForUpdate) {
     if (this.mode === 'create' && !this.profile) {
       this.form = new ProfileForCreate(
-        '', '', null, null, '', '', [], '',0,
-        new Date(),
+        '', '', null, null, '', '', '', 0,''
+     
         
       );
       this.photoPreview = null;
     } else {
       this.mode = 'update';
       this.form = { ...profile };
-this.photoPreview = this.profile?.photo ? URL.createObjectURL(this.profile.photo) : null;
     }
 
     const modalElement = document.getElementById('profileModal');
@@ -58,18 +56,23 @@ this.photoPreview = this.profile?.photo ? URL.createObjectURL(this.profile.photo
     this.modal.hide();
   }
 
-  calculateAge() {
-    if (this.form.birthDate) {
-      const birthDate = new Date(this.form.birthDate);
-      const today = new Date();
-      let age = today.getFullYear() - birthDate.getFullYear();
-      const m = today.getMonth() - birthDate.getMonth();
-      if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
-        age--;
-      }
-      this.form.age = age;
+calculateAge() {
+  if (this.form.dateOfBirth) {
+    const birthDate = new Date(this.form.dateOfBirth); // match the form property
+    const today = new Date();
+    let age = today.getFullYear() - birthDate.getFullYear();
+    const m = today.getMonth() - birthDate.getMonth();
+
+    if (m < 0 || (m === 0 && today.getDate() < birthDate.getDate())) {
+      age--;
     }
+
+    this.form.age = age;
+  } else {
+    this.form.age = null;
   }
+}
+
 
   onFileSelected(event: any) {
     const file = event.target.files[0];
@@ -91,28 +94,31 @@ this.photoPreview = this.profile?.photo ? URL.createObjectURL(this.profile.photo
         this.form.phoneNumber,
         this.form.address,
         this.form.userName,
-        this.form.password,
         this.form.roles || [],
         this.form.jobId,
         this.form.age,
-        this.form.birthDate,
-        this.form.photo
+                this.form.password,
+
+   
+     
       );
       dto.age = this.form.age;
       this.save.emit(dto);
     } else {
       const dto = new ProfileForUpdate(
         this.form.id,
-        this.form.fullName,
+      this.form.fullName,
         this.form.email,
         this.form.phoneNumber,
         this.form.address,
         this.form.userName,
-        this.form.password,
-        this.form.roles,
+        this.form.roles || [],
+        this.form.jobId,
         this.form.age,
-        this.form.birthDate,
-        this.form.photo,
+                this.form.password,
+
+  
+       
       );
       this.save.emit(dto);
     }

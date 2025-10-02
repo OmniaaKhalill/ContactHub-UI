@@ -34,12 +34,12 @@ export class ProfileService {
   }
 
 
-  Create(entity: FormData) {
+  Create(entity: ProfileForCreate) {
     return this.http.post<any>(this.baseUrl + "/api/UserProfiles", entity)
   }
 
 
-  update(entity: FormData, id: string) {
+  update(entity: ProfileForUpdate, id: string) {
     return this.http.put<any>(this.baseUrl + "/api/UserProfiles/" + id, entity)
   }
 

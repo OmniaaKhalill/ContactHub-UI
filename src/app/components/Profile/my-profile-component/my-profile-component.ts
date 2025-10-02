@@ -4,6 +4,7 @@ import { Profile } from '../../../core/models/profile';
 import { CommonModule } from '@angular/common';
 import { ProfileModalComponent } from '../profile-modal-component/profile-modal-component';
 import { Router } from '@angular/router';
+import { AuthService } from '../../../core/services/auth-service';
 
 @Component({
   selector: 'app-my-profile-component',
@@ -12,26 +13,44 @@ import { Router } from '@angular/router';
   styleUrl: './my-profile-component.css'
 })
 export class MyProfileComponent {
-  id: string = "4978a500-de9b-43a0-6e42-08de00b5fb67";
+ 
   user?: Profile;
   errorMessage: string = '';
   selectedItem: Profile | null = null;
   @ViewChild(ProfileModalComponent) modal!: ProfileModalComponent;
 
-  constructor(private profileService: ProfileService, private router:Router) { }
+  constructor(private profileService: ProfileService, private router:Router, private authService:AuthService) { }
 
   ngOnInit(): void {
-    this.profileService.getEntityDetails(this.id).subscribe(
-      (data: Profile) => {
-        this.user = data;  
-        console.log('User data:', data);
-(this.user.roles?.[0]) ?? "User"      },
-      (error) => {
-        console.error('Error: ', error);
-        this.errorMessage = 'Failed to load user profile';
-      }
-    );
+    this.loadUserProfile();
   }
+
+  
+
+private loadUserProfile(): void {
+    const userId = this.authService.getUserClaims()?.Id;
+
+    if (!userId) {
+      this.errorMessage = 'User not logged in or token invalid';
+      return;
+    }
+
+    this.errorMessage = '';
+
+    this.profileService.getEntityDetails(userId).subscribe({
+      next: (data: Profile) => {
+        this.user = data;
+        console.log('User data:', data);
+      },
+      error: (err) => {
+        console.error('Error loading profile:', err);
+        this.errorMessage = 'Failed to load user profile';
+      },
+     
+    });
+  }
+
+
 
   editProfile(profile: Profile) {
 

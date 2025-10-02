@@ -6,17 +6,18 @@ import { ProfilesComponent } from './components/Profile/profiles-component/profi
 import { MyProfileComponent } from './components/Profile/my-profile-component/my-profile-component';
 import { DepartmentsComponent } from './components/Department/departments-component/departments-component';
 import { RegisterComponent } from './components/Auth/register-component/register-component';
+import { authGuard } from './core/guards/auth-guard';
 
 export const routes: Routes = [
 
-{path:"", redirectTo :"home",pathMatch:"full"},
-{path:"home",component:HomeComponent},
-{path:"login",component:LoginComponent},
-{path:"register",component:RegisterComponent},
-{path:"logout", component:HomeComponent},
-{path:"jobs" , component:JobsComponent},
-{path:"departments" , component:DepartmentsComponent},
-{path:"profiles" , component:ProfilesComponent},
-{path:"my-profile" , component:MyProfileComponent},
+  { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'home', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'login', component: LoginComponent },
+  { path: 'register', component: RegisterComponent },
+  { path: 'logout', component: HomeComponent, canActivate: [authGuard] },
+  { path: 'jobs', component: JobsComponent, canActivate: [authGuard] },
+  { path: 'departments', component: DepartmentsComponent, canActivate: [authGuard] },
+  { path: 'profiles', component: ProfilesComponent, canActivate: [authGuard] },
+  { path: 'my-profile', component: MyProfileComponent, canActivate: [authGuard] },
 
 ];

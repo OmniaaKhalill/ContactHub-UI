@@ -17,7 +17,23 @@
 
                     <div class="mb-3">
                         <label class="form-label">Email</label>
-                        <input type="email" [(ngModel)]="form.email" name="email" class="form-control" required>
+                        <input type="email" [(ngModel)]="form.email" name="email" class="form-control" 
+
+                         required
+    #emailModel="ngModel"
+  >
+  <!-- Error messages -->
+   @if (emailModel.invalid && (emailModel.dirty || emailModel.touched)) {
+  <div class="text-danger mt-1" >
+
+@if (emailModel.errors?.['required']) {
+    <div >Email is required.</div>
+}
+    @if (emailModel.errors?.['email']) {
+    <div >Invalid email format.</div>
+    }
+
+  </div>}
                     </div>
 
                     <div class="mb-3">
@@ -33,18 +49,11 @@
           <!-- Age -->
           <div class="mb-3">
             <label class="form-label">Age</label>
-            <input type="number" class="form-control" [(ngModel)]="form.age" name="age" readonly>
+            <input type="number" class="form-control" [(ngModel)]="form.age" name="age" >
           </div>
 
           <!-- Photo -->
-          <div class="mb-3">
-            <label class="form-label">Photo</label>
-            <input type="file" class="form-control" (change)="onFileSelected($event)">
-            @if (photoPreview) {
-            <div  class="mt-2">
-              <img [src]="photoPreview" alt="Preview" class="img-thumbnail" width="120">
-            </div>}
-          </div>
+        
 
                     <div class="mb-3">
                         <label class="form-label">Address</label>
@@ -67,7 +76,7 @@
                     <div class="mb-3">
                         <label class="form-label">Job</label>
                         <select [(ngModel)]="form.jobId" name="jobId" class="form-select">
-                            <option [ngValue]="null" disabled>Select Department</option>
+                            <option [ngValue]="null" disabled>Select Job</option>
                             @for (job of jobs; track job.id) {
                             <option [ngValue]="job.id">
                                 {{ job.name }}

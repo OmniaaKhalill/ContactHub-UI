@@ -8,7 +8,7 @@ export class Profile {
     public userName: string,
     public jobId: string,
     public jobName: string | null,
-    public roles: string[] = [],
+    public role: string,
 
     // New fields
     public birthDate: Date | null,
@@ -24,13 +24,12 @@ export class ProfileForCreate {
     public phoneNumber: string | null,
     public address: string | null,
     public userName: string,
-    public password: string,   // required when creating
-    public roles: string[],
+    public role: string,
     public jobId: string,
  public age: number | null,
+     public password: string,   // required when creating
+
     // New fields
-    public birthDate: Date | null,
-    public photo?: File // send actual file when uploading
   ) {}
 }
 
@@ -42,13 +41,9 @@ export class ProfileForUpdate {
     public phoneNumber: string | null,
     public address: string | null,
     public userName: string,
-    public password?: string,   
-    public roles?: string[],
-
-    // New fields
-    public birthDate?: Date | null,
-    public photo?: File | null,
-    
-     public age?: number | null,
+    public role: string,
+    public jobId: string,
+ public age: number | null,
+     public password?: string,
   ) {}
 }

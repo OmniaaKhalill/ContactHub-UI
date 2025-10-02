@@ -17,7 +17,21 @@
                  [(ngModel)]="form.email"
                  name="email"
                  class="form-control"
-                 placeholder="Enter email">
+                 placeholder="Enter email" required
+    #emailModel="ngModel"
+  >
+  <!-- Validation messages -->
+   @if (emailModel.invalid && (emailModel.dirty || emailModel.touched)) {
+  <div class="text-danger mt-1" >
+
+@if (emailModel.errors?.['required']) {
+    <div >Email is required.</div>
+}
+    @if (emailModel.errors?.['email']) {
+    <div >Invalid email format.</div>
+    }
+
+  </div>}
         </div>
 
         <div class="mb-3">
