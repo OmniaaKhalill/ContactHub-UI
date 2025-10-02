@@ -1,0 +1,24 @@
+.auth-container {
+  height: 100vh; /* full screen */
+}
+
+.auth-left, .auth-right {
+  flex: 1; /* each takes half */
+}
+
+.auth-left {
+  background: #f8f9fa;
+}
+h1 ,h4 {
+    color: white;
+}
+.auth-right {
+  background: #00a264;
+  text-align: center;
+  padding: 2rem;
+}
+
+.auth-form-box {
+  width: 100%;
+  max-width: 400px;
+}

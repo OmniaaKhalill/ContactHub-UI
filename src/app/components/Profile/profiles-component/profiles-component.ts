@@ -31,7 +31,9 @@ jobs: Job[] = [];
 
   ngOnInit(): void {
 
+ this.loadJob()
     this.loadProfiles()
+   
 
   }
 
@@ -42,10 +44,10 @@ loadProfiles(): void {
   this.profileService.GetAll().subscribe({
     next: (data) => {
       this.entities = data;               
-    this.entities =  this.entities.map(job => ({
-          ...job,
-          jobName: this.getJobName(job.id)
-        }));
+    this.entities = this.entities.map(profile => ({
+  ...profile,
+  jobName: this.getJobName(profile.jobId)  // use profile.jobId, not profile.id
+}));
     },
     error: (err) => {
       console.error('Error loading profiles:', err);
@@ -78,13 +80,13 @@ loadProfiles(): void {
     this.modal.open();
   }
 
-  saveProfile(form: any) {
-    if (this.selectedItem) {
-      this.profileService.update(form, this.selectedItem.id).subscribe(() => this.loadProfiles());
-    } else {
-      this.profileService.Create(form).subscribe(() => this.loadProfiles());
-    }
-  }
+  // saveProfile(form: any) {
+  //   if (this.selectedItem) {
+  //     this.profileService.update(form, this.selectedItem.id).subscribe(() => this.loadProfiles());
+  //   } else {
+  //     this.profileService.Create(form).subscribe(() => this.loadProfiles());
+  //   }
+  // }
 
  openDelete(profile: Profile) {
     this.selectedItem = profile;
@@ -101,6 +103,36 @@ loadProfiles(): void {
     }
   }
 
+saveProfile(form: any) {
+  const formData = new FormData();
+
+  formData.append("fullName", form.fullName);
+  formData.append("mobileNumber", form.phoneNumber ?? "");
+  formData.append("dateOfBirth", new Date(form.dateOfBirth).toISOString());
+  formData.append("address", form.address ?? "");
+  formData.append("jobId", form.jobId);
+  formData.append("roles", JSON.stringify(form.roles || []));
+  
+  if (form.password) {
+    formData.append("password", form.password); // include only if provided
+  }
+
+  if (form.photo) {
+    formData.append("photo", form.photo, form.photo.name);
+  }
+
+  if (this.selectedItem) {
+    // 🔹 Update
+    this.profileService.update(formData, this.selectedItem.id).subscribe(() => {
+      this.loadProfiles();
+    });
+  } else {
+    // 🔹 Create
+    this.profileService.Create(formData).subscribe(() => {
+      this.loadProfiles();
+    });
+  }
+}
 
   ngOnDestroy(): void {
   this.entities = [];

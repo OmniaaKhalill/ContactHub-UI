@@ -1,1 +1,42 @@
-<p>login-component works!</p>
+<div class="auth-container d-flex">
+  <div class="auth-right d-flex flex-column justify-content-center align-items-center text-white">
+    <h1 class="display-4 fw-bold">Address Book System</h1>
+    <h4 class="lead">Secure login to manage your contacts</h4>
+    <p>OmniaaKhalill@gmail.com</p>
+  </div>
+
+ 
+  <div class="auth-left d-flex justify-content-center align-items-center">
+    <div class="auth-form-box p-4 shadow rounded bg-white">
+      <h2 class="mb-4 text-center">Login</h2>
+      
+      <form (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label>Email</label>
+          <input type="email"
+                 [(ngModel)]="form.email"
+                 name="email"
+                 class="form-control"
+                 placeholder="Enter email">
+        </div>
+
+        <div class="mb-3">
+          <label>Password</label>
+          <input type="password"
+                 [(ngModel)]="form.password"
+                 name="password"
+                 class="form-control"
+                 placeholder="Enter password">
+        </div>
+
+        <button type="submit" class="btn btn-success w-100">Login</button>
+      </form>
+@if (errorMessage) {
+      <p  class="text-danger text-center mt-2">{{ errorMessage }}</p>
+}
+      <p class="mt-3 text-center text-black pointer">
+        Don’t have an account?
+        <a routerLink="/register">Register</a>
+      </p>
+    </div>
+</div>

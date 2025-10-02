@@ -1,5 +1,5 @@
 import { Component, signal } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { Router, RouterOutlet } from '@angular/router';
 import { NavBar } from './common/nav-bar/nav-bar';
 
 
@@ -10,5 +10,12 @@ import { NavBar } from './common/nav-bar/nav-bar';
   styleUrl: './app.css'
 })
 export class App {
-  protected readonly title = signal('ContactHub-UI');
+
+  protected readonly title = signal('Sddress-Book');
+
+   constructor(private router: Router) {}
+
+  isAuthPage(): boolean {
+    return this.router.url.includes('/login') || this.router.url.includes('/register');
+  }
 }

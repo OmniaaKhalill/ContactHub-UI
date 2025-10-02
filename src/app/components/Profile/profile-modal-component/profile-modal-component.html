@@ -24,6 +24,27 @@
                         <label class="form-label">Phone</label>
                         <input type="text" [(ngModel)]="form.phoneNumber" name="phoneNumber" class="form-control">
                     </div>
+ <div class="mb-3">
+            <label class="form-label">Date of Birth</label>
+            <input type="date" class="form-control" [(ngModel)]="form.dateOfBirth" name="dateOfBirth"
+                   (change)="calculateAge()">
+          </div>
+
+          <!-- Age -->
+          <div class="mb-3">
+            <label class="form-label">Age</label>
+            <input type="number" class="form-control" [(ngModel)]="form.age" name="age" readonly>
+          </div>
+
+          <!-- Photo -->
+          <div class="mb-3">
+            <label class="form-label">Photo</label>
+            <input type="file" class="form-control" (change)="onFileSelected($event)">
+            @if (photoPreview) {
+            <div  class="mt-2">
+              <img [src]="photoPreview" alt="Preview" class="img-thumbnail" width="120">
+            </div>}
+          </div>
 
                     <div class="mb-3">
                         <label class="form-label">Address</label>
@@ -45,7 +66,7 @@
 
                     <div class="mb-3">
                         <label class="form-label">Job</label>
-                        <select [(ngModel)]="form.jobId" class="form-select">
+                        <select [(ngModel)]="form.jobId" name="jobId" class="form-select">
                             <option [ngValue]="null" disabled>Select Department</option>
                             @for (job of jobs; track job.id) {
                             <option [ngValue]="job.id">
