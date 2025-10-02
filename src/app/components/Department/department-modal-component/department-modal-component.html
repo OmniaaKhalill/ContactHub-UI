@@ -1,0 +1,19 @@
+<div class="modal fade" id="departmentModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">{{ department ? 'Update' : 'Create' }} Department</h5>
+        <button type="button" class="btn-close" (click)="close()"></button>
+      </div>
+      <div class="modal-body">
+        <form (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label class="form-label">Name</label>
+            <input type="text" [(ngModel)]="form.name" name="name" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn-primary">{{ department ? 'Update' : 'Create' }}</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -6,7 +6,10 @@ export class Profile {
     public phoneNumber: string | null,
     public address: string | null,
     public userName: string,
-    public roles: string[]
+        public jobId: string,
+
+        public jobName:  string | null,
+    public roles: string[]=[]
   ) {}
 }
 

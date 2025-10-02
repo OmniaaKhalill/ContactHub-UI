@@ -1,1 +1,39 @@
-<p>departments-component works!</p>
+<div class="container mt-4">
+  <div class="d-flex justify-content-between mb-3">
+    <h3>Departments</h3>
+    <button class="btn btn-success btn-sm" (click)="addDepartment()"> Add </button>
+  </div>
+
+  <table class="table table-hover shadow-sm">
+    <thead class="table-light">
+      <tr>
+        <th>Name</th>
+        <th class="text-center">Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+        @for (dept of entities; track $index) {
+      <tr >
+        <td>{{ dept.name }}</td>
+        <td class="text-center">
+          <button class="btn btn-sm btn-warning" (click)="editDepartment(dept)">Update</button>
+          <button class="btn btn-sm btn-danger" (click)="deleteDepartment(dept)">Delete</button>
+        </td>
+      </tr>}
+    </tbody>
+  </table>
+</div>
+
+<!-- Modals -->
+<app-department-modal-component
+  #modal
+  [department]="selectedItem"
+  (save)="saveDepartment($event)">
+</app-department-modal-component>
+
+<app-confirm-delete-component
+  #deleteModal
+  [itemName]="selectedItemName"
+  (confirm)="confirmDelete()">
+</app-confirm-delete-component>
+

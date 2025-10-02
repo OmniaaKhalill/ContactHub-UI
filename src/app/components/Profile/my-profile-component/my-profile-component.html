@@ -1,1 +1,26 @@
-<p>my-profile-component works!</p>
+<div class="container mt-5 d-flex justify-content-center">
+ 
+@if (errorMessage) { 
+    <div  class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+}
+ 
+@if (user) {
+  <div class="card shadow-sm" >
+    <div class="card-header bg-success text-white">
+      My Profile
+    </div>
+    <div class="card-body">
+      <h5 class="card-title">{{ user.fullName }}</h5>
+      <p class="card-text"><strong>Email:</strong> {{ user.email }}</p>
+      <p class="card-text"><strong>Phone:</strong> {{ user.phoneNumber || '-' }}</p>
+      <p class="card-text"><strong>Address:</strong> {{ user.address || '-' }}</p>
+      <p class="card-text"><strong>Username:</strong> {{ user.userName }}</p>
+      <p class="card-text"><strong>Role:</strong> {{ user.roles[0] }}</p>
+           <button class="btn btn-sm btn-success" (click)="ToHome()">Back to home</button>
+    </div>
+  </div>}
+</div>
+
+

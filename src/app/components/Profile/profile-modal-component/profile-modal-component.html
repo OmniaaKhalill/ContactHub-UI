@@ -1,0 +1,77 @@
+<div class="modal fade" id="profileModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form (ngSubmit)="onSubmit()">
+                <div class="modal-header">
+                    <h5 class="modal-title">
+                        {{ mode === 'create' ? 'Add Profile' : 'Update Profile' }}
+                    </h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" [(ngModel)]="form.fullName" name="fullName" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" [(ngModel)]="form.email" name="email" class="form-control" required>
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Phone</label>
+                        <input type="text" [(ngModel)]="form.phoneNumber" name="phoneNumber" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Address</label>
+                        <input type="text" [(ngModel)]="form.address" name="address" class="form-control">
+                    </div>
+
+                    <div class="mb-3">
+                        <label class="form-label">Username</label>
+                        <input type="text" [(ngModel)]="form.userName" name="userName" class="form-control" required>
+                    </div>
+
+                    @if (mode === 'create') {
+                    <div class="mb-3">
+                        <label class="form-label">Password</label>
+                        <input type="password" [(ngModel)]="form.password" name="password" class="form-control"
+                            required>
+                    </div>
+                    }
+
+                    <div class="mb-3">
+                        <label class="form-label">Job</label>
+                        <select [(ngModel)]="form.jobId" class="form-select">
+                            <option [ngValue]="null" disabled>Select Department</option>
+                            @for (job of jobs; track job.id) {
+                            <option [ngValue]="job.id">
+                                {{ job.name }}
+                            </option>}
+                        </select>
+                    </div>
+                    @if (mode === 'create') {
+                    <div class="mb-3">
+                        <label class="form-label">Role</label>
+                        <select [(ngModel)]="form.roles" name="roles" class="form-control" required>
+                            @for (role of ['Admin', 'User']; track role) {
+                            <option [ngValue]="role">{{ role }}</option>
+                            }
+                        </select>
+                    </div>
+                    }
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">
+                        {{ mode === 'create' ? 'Save' : 'Update' }}
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,29 @@
+<div class="modal fade" id="jobModal" tabindex="-1">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">{{ job ? 'Edit Job' : 'Add Job' }}</h5>
+                <button type="button" class="btn-close" (click)="close()"></button>
+            </div>
+            <div class="modal-body">
+                <div class="mb-3">
+                    <label class="form-label">Job Name</label>
+                    <input type="text" [(ngModel)]="form.name" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label class="form-label">Department</label>
+                    <select [(ngModel)]="form.departmentId" class="form-select">
+                        <option [ngValue]="null" disabled>Select Department</option>
+                        @for (dept of departments; track dept.id) {
+                        <option  [ngValue]="dept.id">
+                            {{ dept.name }}
+                        </option>}
+                    </select>
+                </div>
+                <div class="modal-footer">
+                    <button class="btn btn-secondary" (click)="close()">Cancel</button>
+                    <button class="btn btn-primary" (click)="onSubmit()">Save</button>
+                </div>
+            </div>
+        </div>
+    </div>
