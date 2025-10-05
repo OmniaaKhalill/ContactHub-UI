@@ -20,6 +20,7 @@ export class ProfileModalComponent {
   form: any = {};
   modal: any;
   photoPreview: string | null = null;
+  ageError: string | null = null;
 
   ngOnChanges() {
     if (this.mode === 'update' && this.profile) {
@@ -58,7 +59,7 @@ export class ProfileModalComponent {
 
 calculateAge() {
   if (this.form.dateOfBirth) {
-    const birthDate = new Date(this.form.dateOfBirth); // match the form property
+    const birthDate = new Date(this.form.dateOfBirth);
     const today = new Date();
     let age = today.getFullYear() - birthDate.getFullYear();
     const m = today.getMonth() - birthDate.getMonth();
@@ -68,10 +69,20 @@ calculateAge() {
     }
 
     this.form.age = age;
+
+   
+    if (age < 22) {
+      this.ageError = 'Age must be at least 22 years old.';
+    } else {
+      this.ageError = null;
+    }
+
   } else {
     this.form.age = null;
+    this.ageError = null;
   }
 }
+
 
 
   onFileSelected(event: any) {
@@ -87,6 +98,10 @@ calculateAge() {
   }
 
   onSubmit() {
+
+      if (this.form.age < 22) {
+    this.ageError = 'Age must be at least 22 years old.';
+    return;}
     if (this.mode === 'create') {
       const dto = new ProfileForCreate(
         this.form.fullName,

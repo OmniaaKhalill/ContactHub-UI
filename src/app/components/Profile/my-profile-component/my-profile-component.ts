@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { ProfileService } from '../../../core/services/profile-service';
 import { Profile } from '../../../core/models/profile';
 import { CommonModule } from '@angular/common';
@@ -19,7 +19,7 @@ export class MyProfileComponent {
   selectedItem: Profile | null = null;
   @ViewChild(ProfileModalComponent) modal!: ProfileModalComponent;
 
-  constructor(private profileService: ProfileService, private router:Router, private authService:AuthService) { }
+  constructor(private profileService: ProfileService, private router:Router, private authService:AuthService,private cdr: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.loadUserProfile();
@@ -41,6 +41,7 @@ private loadUserProfile(): void {
       next: (data: Profile) => {
         this.user = data;
         console.log('User data:', data);
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error loading profile:', err);

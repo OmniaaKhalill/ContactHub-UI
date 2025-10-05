@@ -3,3 +3,9 @@
     min-width: 70%;
     border: none;
 }
+.card-header{
+    background-color: #007bff;
+    color: white;
+    font-weight: bold;
+  font-size: larger;
+}

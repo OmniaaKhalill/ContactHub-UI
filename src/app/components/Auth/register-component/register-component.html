@@ -38,7 +38,7 @@
                  required
                              
     #emailModel="ngModel"
-  >>
+  >
                  @if (registerForm.submitted && !form.email) {
           <div class="text-danger">
             Email is required
@@ -49,9 +49,7 @@
    @if (emailModel.invalid && (emailModel.dirty || emailModel.touched)) {
   <div class="text-danger mt-1" >
 
-@if (emailModel.errors?.['required']) {
-    <div >Email is required.</div>
-}
+
     @if (emailModel.errors?.['email']) {
     <div >Invalid email format.</div>
     }

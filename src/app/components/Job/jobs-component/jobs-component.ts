@@ -1,4 +1,4 @@
-import { Component, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, ViewChild } from '@angular/core';
 import { JobService } from '../../../core/services/job-service';
 import { Job } from '../../../core/models/job';
 import { ConfirmDeleteComponent } from '../../../common/confirm-delete-component/confirm-delete-component';
@@ -23,7 +23,7 @@ export class JobsComponent {
 
   @ViewChild('deleteModal') deleteModal!: ConfirmDeleteComponent;
   @ViewChild(JobModalComponent) modal!: JobModalComponent;
-  constructor(private jobService: JobService,private departmentService: DepartmentService) {}
+  constructor(private jobService: JobService,private departmentService: DepartmentService,private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
       this.loadDepartments();
@@ -33,6 +33,7 @@ export class JobsComponent {
     this.departmentService.GetAll().subscribe({
       next: (data) => {
         this.departments = data;
+            this.cdr.detectChanges();
       },
       error: (err) => console.error('Error loading departments', err)
     });
@@ -46,6 +47,7 @@ export class JobsComponent {
           ...job,
           departmentName: this.getDepartmentName(job.departmentId)
         }));
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error loading jobs', err)
     });
