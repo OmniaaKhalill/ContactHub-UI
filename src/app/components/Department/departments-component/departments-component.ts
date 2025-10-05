@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, ViewChild } from '@angular/core';
 import { DepartmentService } from '../../../core/services/department-service';
 import { DepartmentModalComponent } from '../department-modal-component/department-modal-component';
 import { ConfirmDeleteComponent } from '../../../common/confirm-delete-component/confirm-delete-component';
@@ -19,7 +19,7 @@ export class DepartmentsComponent implements OnInit {
   @ViewChild('deleteModal') deleteModal!: ConfirmDeleteComponent;
   @ViewChild(DepartmentModalComponent) modal!: DepartmentModalComponent;
 
-  constructor(private deptService: DepartmentService) {}
+  constructor(private deptService: DepartmentService,private cdr: ChangeDetectorRef) {}
 
   ngOnInit(): void {
     this.loadDepartments();
@@ -30,6 +30,7 @@ export class DepartmentsComponent implements OnInit {
       next: (data) => {
         this.entities = data;
         console.log('Departments loaded:', this.entities);
+        this.cdr.detectChanges();
       },
       error: (err) => console.error('Error loading departments:', err)
     });

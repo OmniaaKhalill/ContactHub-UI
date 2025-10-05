@@ -33,8 +33,10 @@ export class ProfilesComponent {
 
   ngOnInit(): void {
     this.loadJob();
+   
     this.loadProfiles();
-    this.cdr.detectChanges();
+     console.log(this.entities); // the data appers in console
+    
   }
 
   loadProfiles(): void {
@@ -49,6 +51,7 @@ export class ProfilesComponent {
         }));
 
         this.filteredEntities = this.entities; 
+        this.cdr.detectChanges();
       },
       error: (err) => {
         console.error('Error loading profiles:', err);
